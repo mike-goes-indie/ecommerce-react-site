@@ -1,17 +1,21 @@
-import Image1 from "../assets/images/image-product-1-thumbnail.jpg"
-import Image2 from "../assets/images/image-product-2-thumbnail.jpg"
-import Image3 from "../assets/images/image-product-3-thumbnail.jpg"
-import Image4 from "../assets/images/image-product-4-thumbnail.jpg"
+import { ImageContextType, imageContext } from "./Providers/ImageProvider"
 import Thumbnail from "./Thumbnail"
+import { useContext } from "react"
 
 
-export default function ImageCarousel() {
+export default function ImageCarousel({arr}:{arr:string[]}) {
+
+  const {imageActive, setImageActive} = useContext(imageContext) as ImageContextType
+
   return (
     <div className="sm:flex justify-between  w-full hidden">
-      <Thumbnail src={Image1} alt={"image of sneaker"}/>
-      <Thumbnail src={Image2} alt={"image of sneaker"}  />
-      <Thumbnail src={Image3} alt={"image of sneaker"}  />
-      <Thumbnail src={Image4} alt={"image of sneaker"}  />
+      {
+        arr.map((el , index)=> {
+        return  (
+              <Thumbnail key={index} src={el} alt={"image of sneaker"} width={'w-[21%]'}  border={ imageActive === index ? 'border-2 border-Orange' : 'border-none' } onClick={ () => setImageActive(index)} />
+          )
+        })
+      }
     </div>
   )
 }

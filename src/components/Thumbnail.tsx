@@ -1,16 +1,21 @@
 type ImagePropsType = {
     src: string
     alt: string
+    width?: string
+    border?: string
+    onClick?: () => void
   }
 
-export default function Thumbnail({src, alt}: ImagePropsType) {
+export default function Thumbnail({src, alt, width, border, onClick}: ImagePropsType) {
   return (
-        <img 
+        <img
             src={src}
             alt={alt}
-            className={`sm:rounded-md md:rounded-lg  object-contain
-            w-[21%]
-           `}
+            width={width}
+            className={` sm:rounded-md md:rounded-lg  object-contain
+            ${width} ${border} `}
+            onClick = {onClick}
+          //  w-[21%]
         />
   )
 }
